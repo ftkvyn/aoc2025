@@ -10,6 +10,7 @@ const main = async () => {
     lines.forEach(line => {
         let dir = line[0];
         let count = +line.slice(1);
+        let oldCur = curr;
         // if (count > 100) {
         //     zeros += Math.abs(Math.floor(curr / 100));
         //     count = count % 100;
@@ -23,12 +24,30 @@ const main = async () => {
         }
         // 4932 too low
         // 5941 too low
+        // 6225 wrong
+        // 6269 wrong
         // 6296 too high
         if (dir == "R") {
             curr = curr + count;
         }
-        zeros += Math.abs(Math.floor(curr / 100));
-        console.log(dir + ' ' + count + ' ==>> ' + curr);
+        
+        let add = 0;//Math.abs(Math.floor(curr / 100));
+        let raw = curr;
+        // if (curr == 0) {
+        //     add ++;
+        // }
+        while (curr < 0) {
+            curr += 100;
+            add ++;
+        }
+        while (curr >= 100) {
+            curr -= 100;
+            add ++;
+        }
+        
+        console.log(`${oldCur} -> ${raw} : ${add}`);
+        zeros += add;
+        // console.log(dir + ' ' + count + ' ==>> ' + curr + ' + ' + add);
         
         curr = (curr + 100) % 100;
 
