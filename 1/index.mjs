@@ -16,41 +16,33 @@ const main = async () => {
         //     count = count % 100;
         // }
         // console.log(dir + ' ' + count);
-        if (dir == "L") {
-            curr = curr - count;
-            // if (curr < 0) {
-            //     zeros ++;
-            // }
-        }
+        let steps = dir == "L" ? -count : count;
         // 4932 too low
         // 5941 too low
         // 6225 wrong
         // 6269 wrong
         // 6296 too high
-        if (dir == "R") {
-            curr = curr + count;
+        while (steps != 0) {
+            if (dir == "L") {
+                curr -= 1;
+                steps +=1;
+            } else {
+                curr += 1;
+                steps -= 1;
+            }
+            if (curr == 0) {
+                zeros++;
+            } if (curr == 100) {
+                zeros++;
+                curr = 0;
+            } if (curr == -100) {
+                zeros++;
+                curr = 0;
+            }
         }
         
-        let add = 0;//Math.abs(Math.floor(curr / 100));
-        let raw = curr;
-        // if (curr == 0) {
-        //     add ++;
-        // }
-        while (curr < 0) {
-            curr += 100;
-            add ++;
-        }
-        while (curr >= 100) {
-            curr -= 100;
-            add ++;
-        }
+        console.log(`${curr} -> ${zeros}`);
         
-        console.log(`${oldCur} -> ${raw} : ${add}`);
-        zeros += add;
-        // console.log(dir + ' ' + count + ' ==>> ' + curr + ' + ' + add);
-        
-        curr = (curr + 100) % 100;
-
         // console.log(curr);
         // if (curr === 0) {
         //     zeros++;
